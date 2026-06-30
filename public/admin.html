@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 绩溪有佳电脑</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div id="loginPanel" class="login-container"><div class="login-box"><h2>管理后台登录</h2><form id="loginForm"><div class="form-group"><label>用户名</label><input type="text" id="username" required></div><div class="form-group"><label>密码</label><input type="password" id="password" required></div><button type="submit" class="btn-submit">登录</button></form></div></div>
+<div id="adminPanel" style="display:none;">
+    <nav class="navbar"><div class="container"><div class="logo"><img id="logoImg" src="" alt="Logo" style="height:40px;"><span>绩溪有佳电脑管理后台</span></div><ul class="nav-links"><li><a href="index.html">官网首页</a></li><li><a href="#" id="logoutBtn">退出登录</a></li></ul></div></nav>
+    <div class="admin-container"><div class="admin-header"><h2><i class="fas fa-tachometer-alt"></i> 工单管理系统</h2><button id="refreshBtn" class="btn-refresh"><i class="fas fa-sync-alt"></i> 刷新</button></div>
+    <div class="stats-bar"><div class="stat-card">总工单数 <span id="totalCount">0</span></div><div class="stat-card">已收款 <span id="paidCount">0</span></div><div class="stat-card">待收款 <span id="unpaidCount">0</span></div></div>
+    <div style="margin-bottom:20px;"><button id="createTicketBtn" class="btn-primary"><i class="fas fa-plus"></i> 新建工单</button> <button id="uploadLogoBtn" class="btn-outline"><i class="fas fa-image"></i> 上传LOGO</button><input type="file" id="logoFile" accept="image/*" style="display:none;"></div>
+    <div class="table-wrapper"><table class="ticket-table"><thead><tr><th>工单号</th><th>客户姓名</th><th>电话</th><th>设备型号</th><th>上门费</th><th>检测费</th><th>维修费</th><th>配件费</th><th>合计</th><th>状态</th><th>创建时间</th><th>操作</th></tr></thead><tbody id="ticketList"></tbody></table></div>
+    <div id="loadingMsg" class="loading-msg">加载中...</div></div>
+    <div id="editModal" class="modal hidden"><div class="modal-content"><span class="close">&times;</span><h3 id="modalTitle">编辑工单</h3><form id="editForm"><input type="hidden" id="editId"><div class="form-group"><label>客户姓名 *</label><input type="text" id="editName" required></div><div class="form-group"><label>电话</label><input type="text" id="editPhone"></div><div class="form-group"><label>设备型号</label><input type="text" id="editDevice"></div><div class="form-group"><label>故障描述</label><textarea id="editFault" rows="2"></textarea></div><div class="form-row"><div class="half"><label>上门费 (¥)</label><input type="number" id="editVisitFee" step="0.01" value="0"></div><div class="half"><label>检测费 (¥)</label><input type="number" id="editInspectFee" step="0.01" value="0"></div></div><div class="form-row"><div class="half"><label>维修费 (¥)</label><input type="number" id="editRepairCost" step="0.01" value="0"></div><div class="half"><label>配件费 (¥)</label><input type="number" id="editPartsCost" step="0.01" value="0"></div></div><div class="form-group"><label>支付状态</label><select id="editPayStatus"><option value="0">未收款</option><option value="1">已收款</option></select></div><button type="submit" class="btn-save">保存</button></form></div></div>
+</div>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

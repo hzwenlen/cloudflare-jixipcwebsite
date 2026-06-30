@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工单查询 - 绩溪有佳电脑</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar"><div class="container"><div class="logo"><img id="logoImg" src="" alt="Logo" style="height:40px;"><span>绩溪有佳电脑</span></div><ul class="nav-links"><li><a href="index.html">首页</a></li><li><a href="query.html" class="active">工单查询</a></li><li><a href="admin.html">管理后台</a></li></ul><div class="menu-toggle"><i class="fas fa-bars"></i></div></div></nav>
+    <div class="page-container"><div class="form-container"><h2><i class="fas fa-search"></i> 维修工单查询</h2><p class="sub">请输入工单号或报修手机号查询进度</p><form id="queryForm"><div class="form-group"><label>工单号</label><input type="text" id="ticketNo" placeholder="例如 JX202504261530121234"></div><div class="form-group"><label>报修手机号</label><input type="tel" id="phone" placeholder="填写报修时使用的手机号"></div><button type="submit" class="btn-submit"><i class="fas fa-search"></i> 查询</button></form></div><div id="queryResult" class="ticket-result hidden"><h3><i class="fas fa-clipboard-list"></i> 查询结果</h3><div id="resultList"></div></div></div>
+    <script src="js/common.js"></script>
+    <script>
+        fetch('/api/public/logo').then(res=>res.json()).then(data=>{if(data.url)document.getElementById('logoImg').src=data.url});
+        document.getElementById('queryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const ticketNo = document.getElementById('ticketNo').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!ticketNo && !phone) return alert('请填写工单号或手机号');
+            let url = '/api/public/tickets?' + (ticketNo ? `ticket_no=${encodeURIComponent(ticketNo)}` : `phone=${encodeURIComponent(phone)}`);
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                const container = document.getElementById('resultList');
+                if (!data.length) container.innerHTML = '<p>未找到相关工单</p>';
+                else container.innerHTML = data.map(t => `
+                    <div class="query-card"><div><strong>工单号：</strong> ${t.ticket_no}</div><div><strong>客户姓名：</strong> ${escapeHtml(t.customer_name)}</div><div><strong>设备型号：</strong> ${t.device_model||'—'}</div><div><strong>故障描述：</strong> ${t.fault||'—'}</div><div><strong>上门费：</strong> ¥${Number(t.visit_fee).toFixed(2)}</div><div><strong>检测费：</strong> ¥${Number(t.inspect_fee).toFixed(2)}</div><div><strong>维修费：</strong> ¥${Number(t.repair_cost).toFixed(2)}</div><div><strong>配件费：</strong> ¥${Number(t.parts_cost).toFixed(2)}</div><div><strong>合计金额：</strong> ¥${Number(t.total_amount).toFixed(2)}</div><div><strong>收款状态：</strong> <span class="status-badge ${t.payment_status===1?'status-paid':'status-unpaid'}">${t.payment_status===1?'已收款':'待收款'}</span></div><div><strong>创建时间：</strong> ${new Date(t.created_at).toLocaleString()}</div>${t.payment_date?`<div><strong>收款日期：</strong> ${new Date(t.payment_date).toLocaleString()}</div>`:''}</div>
+                `).join('');
+                document.getElementById('queryResult').classList.remove('hidden');
+            } catch(err) { alert('查询失败'); }
+        });
+        document.querySelector('.menu-toggle').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('active');});
+    </script>
+</body>
+</html>

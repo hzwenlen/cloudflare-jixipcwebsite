@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绩溪有佳电脑 | 专业电脑维修服务</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo"><img id="logoImg" src="" alt="Logo" style="height:40px;"><span>绩溪有佳电脑</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#services">服务项目</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact">联系方式</a></li>
+                <li><a href="query.html" class="btn-nav">工单查询</a></li>
+                <li><a href="admin.html" class="btn-nav-admin">管理后台</a></li>
+            </ul>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>绩溪有佳电脑维修</h1>
+                <p>专业 · 快速 · 可靠 — 您身边的电脑专家</p>
+                <div class="hero-buttons">
+                    <a href="query.html" class="btn-primary">查询工单状态 <i class="fas fa-search"></i></a>
+                    <a href="#services" class="btn-outline">了解更多信息</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services"><div class="container"><h2 class="section-title">我们的服务</h2><div class="services-grid"><div class="service-card"><i class="fas fa-desktop"></i><h3>台式机维修</h3><p>主板维修、电源更换、硬件升级、系统重装</p></div><div class="service-card"><i class="fas fa-laptop"></i><h3>笔记本维修</h3><p>屏幕更换、键盘维修、散热清灰、进水处理</p></div><div class="service-card"><i class="fas fa-database"></i><h3>数据恢复</h3><p>硬盘数据恢复、误删文件找回、U盘修复</p></div><div class="service-card"><i class="fas fa-network-wired"></i><h3>网络维护</h3><p>路由器设置、网络布线、无线覆盖优化</p></div></div></div></section>
+    <section id="about" class="about"><div class="container"><div class="about-content"><div class="about-text"><h2>关于绩溪有佳电脑</h2><p>绩溪有佳电脑公司成立于2024年，深耕计算机行业20余年，现转到绩溪服务本地电脑大众。我们拥有经验丰富的技术团队，主打，真诚，负责，为您省钱的原则。</p><p>无论是家庭电脑故障，还是企业IT维护，我们都能为您提供最专业的解决方案。透明报价，修不好不收费，让您放心托付。</p><div class="stats"><div><span>5000+</span><br>维修案例</div><div><span>98%</span><br>客户满意度</div><div><span>2h</span><br>快速响应</div></div></div><div class="about-image"><i class="fas fa-tools"></i></div></div></div></section>
+    <section id="contact" class="contact"><div class="container"><h2 class="section-title">联系我们</h2><div class="contact-grid"><div class="contact-info"><div><i class="fas fa-map-marker-alt"></i> 地址：绩溪县华阳镇华高路35号</div><div><i class="fas fa-phone"></i> 电话：0563-0000000 / 19285591995</div><div><i class="fas fa-envelope"></i> 邮箱：jixiyoujia@163.com</div><div><i class="fas fa-clock"></i> 营业：周一至周日 9:00 - 19:00</div></div><div class="map-placeholder"><i class="fas fa-map"></i><p>绩溪县华阳镇华高路35号</p></div></div></div></section>
+    <footer><div class="container"><p>&copy; 2024 绩溪有佳电脑公司 版权所有 | 皖ICP备12345678号</p></div></footer>
+    <script src="js/common.js"></script>
+    <script>
+        fetch('/api/public/logo').then(res=>res.json()).then(data=>{if(data.url)document.getElementById('logoImg').src=data.url});
+        document.querySelector('.menu-toggle').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('active');});
+    </script>
+</body>
+</html>
