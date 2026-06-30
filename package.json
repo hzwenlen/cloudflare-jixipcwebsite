@@ -1,0 +1,20 @@
+{
+  "name": "jixi-pc-repair-system",
+  "version": "3.1.0",
+  "description": "绩溪有佳电脑公司 - 维修工单管理（上门费/检测费，HTML收据+红色方形公章）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cjs": "^0.0.11",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
